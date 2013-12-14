@@ -17,14 +17,30 @@ Running the RabbitMQ server
 
 Run the following command to start rabbitmq:
 
-	ID=$(sudo docker run -d -p 5672 tutum/rabbitmq)
+	CONTAINER_ID=$(sudo docker run -d -p 5672 tutum/rabbitmq)
 
+The first time that you run your container, a new random password will be set.
+To get the password, check the logs of the container by running:
 
-It will store the new container ID (like `d35bf1374e88`) in $ID. Get the allocated external port:
+	sudo docker logs $CONTAINER_ID
 
-	sudo docker port $ID 5672
+You will see an output like the following:
 
+	========================================================================
+	You can now connect to this RabbitMQ server using, for example:
 
-It will print the allocated port (like 47283).
+	    rabbitmqadmin -u admin -p 5elsT6KtjrqV -H <host> -P <port> list vhosts
+
+	Please remember to change the above password as soon as possible!
+	========================================================================
+
+In this case, `5elsT6KtjrqV` is the password set. To get
+the allocated port to RabbitMQ, execute:
+
+	sudo docker port $CONTAINER_ID 5672
+
+It will print the allocated port (like 4751). You can then connect to RabbitMQ:
+
+	 rabbitmqadmin -u admin -p 5elsT6KtjrqV -H 127.0.0.1 -P 4751 list vhosts
 
 Done!
