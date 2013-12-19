@@ -7,9 +7,11 @@ fi
 
 PASS=$(pwgen -s 12 1)
 echo "=> Securing RabbitMQ with a random password"
-touch /etc/rabbitmq/rabbitmq-env.conf
-echo "default_user=admin" >> /etc/rabbitmq/rabbitmq-env.conf
-echo "default_pass=$PASS" >> /etc/rabbitmq/rabbitmq-env.conf
+cat > /etc/rabbitmq/rabbitmq.config <<EOF
+[
+	{rabbit, [{default_user, <<"admin">>},{default_pass, <<"$PASS">>}]}
+].
+EOF
 
 echo "=> Done!"
 touch /.rabbitmq_password_set
