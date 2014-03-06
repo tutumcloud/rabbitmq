@@ -17,12 +17,12 @@ Running the RabbitMQ server
 
 Run the following command to start rabbitmq:
 
-	CONTAINER_ID=$(sudo docker run -d -p 5672 -p 55672 tutum/rabbitmq)
+	docker run -d -p 5672:5672 -p 55672:55672 tutum/rabbitmq
 
 The first time that you run your container, a new random password will be set.
 To get the password, check the logs of the container by running:
 
-	sudo docker logs $CONTAINER_ID
+	docker logs <CONTAINER_ID>
 
 You will see an output like the following:
 
@@ -34,13 +34,22 @@ You will see an output like the following:
 	Please remember to change the above password as soon as possible!
 	========================================================================
 
-In this case, `5elsT6KtjrqV` is the password set. To get
-the allocated port to RabbitMQ, execute:
+In this case, `5elsT6KtjrqV` is the password set. 
+You can then connect to RabbitMQ:
 
-	sudo docker port $CONTAINER_ID 55672
-
-It will print the allocated port (like 4751). You can then connect to RabbitMQ:
-
-	 rabbitmqadmin -u admin -p 5elsT6KtjrqV -H 127.0.0.1 -P 4751 list vhosts
+	rabbitmqadmin -u admin -p 5elsT6KtjrqV -P 55672 list vhosts
 
 Done!
+
+
+Setting a specific password for the admin account
+-------------------------------------------------
+
+If you want to use a preset password instead of a randomly generated one, you can
+set the environment variable `RABBITMQ_PASS` to your specific password when running the container:
+
+	docker run -d -p 5672:5672 -p 55672:55672 -e RABBITMQ_PASS="mypass" tutum/rabbitmq
+
+You can now test your new admin password:
+
+	rabbitmqadmin -u admin -p mypass -P 55672 list vhosts

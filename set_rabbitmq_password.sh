@@ -5,8 +5,9 @@ if [ -f /.rabbitmq_password_set ]; then
 	exit 0
 fi
 
-PASS=$(pwgen -s 12 1)
-echo "=> Securing RabbitMQ with a random password"
+PASS=${RABBITMQ_PASS:-$(pwgen -s 12 1)}
+_word=$( [ ${RABBITMQ_PASS} ] && echo "preset" || echo "random" )
+echo "=> Securing RabbitMQ with a ${_word} password"
 cat > /etc/rabbitmq/rabbitmq.config <<EOF
 [
 	{rabbit, [{default_user, <<"admin">>},{default_pass, <<"$PASS">>}]}
