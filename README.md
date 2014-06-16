@@ -48,7 +48,7 @@ Setting a specific password for the admin account
 If you want to use a preset user and/or password instead of 'admin' and a randomly generated password, you can
 set the environment variables `RABBITMQ_USER` and `RABBITMQ_PASS` to your specific username and/or password when running the container:
 
-	docker run -d -p 5672:5672 -p 15672:15672 -e RABBITMQ_PASS="myuser" -e RABBITMQ_PASS="mypass" mminder/rabbitmq
+	docker run -d -p 5672:5672 -p 15672:15672 -e RABBITMQ_USER="myuser" -e RABBITMQ_PASS="mypass" mminder/rabbitmq
 
 You can now test your new credentials:
 
