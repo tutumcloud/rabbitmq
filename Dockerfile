@@ -2,9 +2,11 @@ FROM ubuntu:trusty
 MAINTAINER Fernando Mayo <fernando@tutum.co>
 
 # Install RabbitMQ
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server pwgen
-RUN rabbitmq-plugins enable rabbitmq_management
+RUN apt-get update && \
+    apt-get install -y rabbitmq-server pwgen && \
+    rabbitmq-plugins enable rabbitmq_management && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Add scripts
 ADD run.sh /run.sh
