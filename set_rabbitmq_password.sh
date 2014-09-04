@@ -21,7 +21,7 @@ touch /.rabbitmq_password_set
 echo "========================================================================"
 echo "You can now connect to this RabbitMQ server using, for example:"
 echo ""
-echo "    rabbitmqadmin -u $USER -p $PASS -H <host> -P <port> list vhosts"
+echo "    curl --user $USER:$PASS http://<host>:<port>/api/vhosts"
 echo ""
 echo "Please remember to change the above password as soon as possible!"
 echo "========================================================================"

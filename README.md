@@ -29,7 +29,7 @@ You will see an output like the following:
 	========================================================================
 	You can now connect to this RabbitMQ server using, for example:
 
-	    rabbitmqadmin -u admin -p 5elsT6KtjrqV -H <host> -P <port> list vhosts
+            curl --user admin:5elsT6KtjrqV  http://<host>:<port>/api/vhosts
 
 	Please remember to change the above password as soon as possible!
 	========================================================================
@@ -37,7 +37,7 @@ You will see an output like the following:
 In this case, `5elsT6KtjrqV` is the password set. 
 You can then connect to RabbitMQ:
 
-	rabbitmqadmin -u admin -p 5elsT6KtjrqV -P 15672 list vhosts
+        curl --user admin:5elsT6KtjrqV  http://<host>:<port>/api/vhosts
 
 Done!
 
@@ -52,4 +52,4 @@ set the environment variable `RABBITMQ_PASS` to your specific password when runn
 
 You can now test your new admin password:
 
-	rabbitmqadmin -u admin -p mypass -P 15672 list vhosts
+        curl --user admin:mypass  http://<host>:<port>/api/vhosts
