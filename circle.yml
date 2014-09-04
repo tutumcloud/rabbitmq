@@ -1,0 +1,10 @@
+machine:
+  services:
+    - docker
+dependencies:
+  override:
+    - docker build -t rabbitmq .
+test:
+  override:
+    - docker run -d -p 5673:5672 -p 15673:15672 -e RABBITMQ_PASS="mypass" rabbitmq; sleep 20
+    - curl -i --user admin:mypass http://localhost:15673/api/vhosts | grep "200 OK"
