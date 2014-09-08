@@ -1,6 +1,10 @@
 FROM ubuntu:trusty
 MAINTAINER Fernando Mayo <fernando@tutum.co>
 
+ADD rabbitmq-signing-key-public.asc /tmp/rabbitmq-signing-key-public.asc
+RUN echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list && \
+    apt-key add /tmp/rabbitmq-signing-key-public.asc
+
 # Install RabbitMQ
 RUN apt-get update && \
     apt-get install -y rabbitmq-server pwgen && \
