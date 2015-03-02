@@ -53,3 +53,32 @@ set the environment variable `RABBITMQ_PASS` to your specific password when runn
 You can now test your new admin password:
 
         curl --user admin:mypass  http://<host>:<port>/api/vhosts
+
+
+Running a RabbitMQ cluster
+--------------------------
+
+Tu run a cluster with all the DNS-Reachable Host, you have to set RABBITMQ_USE_LONGNAME 
+and HOSTNAME on first server :
+
+```
+docker run --name tutum/rabbitmq -d \
+ -p 5672:5672 -p 15672:15672 -p 35197:35197 -p 4369:4369 -p 25672:25672 \
+ -v /rabbitmqdata:/var/lib/rabbitmq/mnesia \
+ -e HOSTNAME=node1.host.io \
+ -e RABBITMQ_USE_LONGNAME=true \
+ tutum/rabbitmq
+```
+
+And add CLUSTER_WITH for the others nodes :
+
+```
+docker run --name tutum/rabbitmq -d \ 
+ -p 5672:5672 -p 15672:15672 -p 35197:35197 -p 4369:4369 -p 25672:25672 \ 
+ -v /rabbitmqdata:/var/lib/rabbitmq/mnesia \ 
+ -e HOSTNAME=node2.host.io \ 
+ -e RABBITMQ_USE_LONGNAME=true \ 
+ -e CLUSTER_WITH=node1.host.io \ 
+ tutum/rabbitmq
+```
+
