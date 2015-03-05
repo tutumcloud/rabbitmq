@@ -17,7 +17,7 @@ else
         rabbitmqctl stop_app
         rabbitmqctl join_cluster rabbit@$CLUSTER_WITH
         rabbitmqctl start_app
-        tail -f /var/log/rabbitmq/rabbit\@$HOSTNAME.log
+        tail -F /var/log/rabbitmq/rabbit\@$HOSTNAME.log
     fi
 fi
 
