@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -m
+
 if [ ! -f /.rabbitmq_password_set ]; then
 	/set_rabbitmq_password.sh
 fi
@@ -10,14 +13,14 @@ if [ -z "$CLUSTER_WITH" ] ; then
     /usr/sbin/rabbitmq-server
 else
     if [ -f /.CLUSTERED ] ; then
-        /usr/sbin/rabbitmq-server
+    /usr/sbin/rabbitmq-server
     else
         touch /.CLUSTERED
-        /usr/sbin/rabbitmq-server -detached
+        /usr/sbin/rabbitmq-server &
         rabbitmqctl stop_app
         rabbitmqctl join_cluster rabbit@$CLUSTER_WITH
         rabbitmqctl start_app
-        tail -F /var/log/rabbitmq/rabbit\@$HOSTNAME.log
+        fg
     fi
 fi
 
