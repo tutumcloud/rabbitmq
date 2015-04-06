@@ -58,8 +58,8 @@ You can now test your new admin password:
 Running a RabbitMQ cluster
 --------------------------
 
-To run a cluster with all the DNS-Reachable Host, you have to set RABBITMQ_USE_LONGNAME 
-and HOSTNAME on first server :
+To run a cluster with all the DNS-Reachable Host, you have to set `RABBITMQ_USE_LONGNAME`
+and `HOSTNAME` on first server :
 
 ```
 docker run -d \
@@ -69,7 +69,7 @@ docker run -d \
  tutum/rabbitmq
 ```
 
-And add CLUSTER_WITH for the others nodes :
+And add `CLUSTER_WITH` for the others nodes :
 
 ```
 docker run -d \
@@ -79,4 +79,16 @@ docker run -d \
  -e CLUSTER_WITH=node1.host.io \
  tutum/rabbitmq
 ```
+RabbitMQ cluster stack file with Tutum
+------------------------------------
 
+```
+rabbitmq-master:
+  image: tutum/rabbitmq
+rabbitmq-slave:
+  image: tutum/rabbitmq
+  environment:
+    - CLUSTER_WITH=rabbitmq-master-1
+  links:
+    - rabbitmq-master
+```
