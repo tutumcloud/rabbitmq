@@ -1,4 +1,5 @@
-FROM ubuntu:trusty
+FROM tutum/rabbitmq:latest 
+# FROM ubuntu:trusty
 MAINTAINER Ramon Brooker <rbrooker@aetherealmind.com>
 #MAINTAINER Fernando Mayo <fernando@tutum.co>
 
