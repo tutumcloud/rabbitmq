@@ -26,6 +26,7 @@ else
         fi
         rabbitmqctl start_app
         fg
+        rabbitmq-plugins disable rabbitmq_managment
         rabbitmq-plugins enable rabbitmq_management_agent
         /usr/sbin/rabbitmq-server stop
     fi
