@@ -1,5 +1,6 @@
 FROM ubuntu:trusty
-MAINTAINER Fernando Mayo <fernando@tutum.co>
+MAINTAINER Ramon Brooker <rbrooker@aetherealmind.com>
+#MAINTAINER Fernando Mayo <fernando@tutum.co>
 
 # Install RabbitMQ
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F7B8CEA6056E8E56 && \
