@@ -19,7 +19,11 @@ else
         /usr/sbin/rabbitmq-server &
         sleep 10
         rabbitmqctl stop_app
-        rabbitmqctl join_cluster rabbit@$CLUSTER_WITH
+        if [ -z "$NODE_TYPE" ] ; then
+          rabbitmqctl join_cluster rabbit@$CLUSTER_WITH
+        else 
+          rabbitmqctl join_cluster $NODE_TYPE rabbit@$CLUSTER_WITH
+        fi
         rabbitmqctl start_app
         fg
     fi
