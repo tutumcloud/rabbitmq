@@ -22,10 +22,13 @@ else
         if [ -z "$NODE_TYPE" ] ; then
           rabbitmqctl join_cluster rabbit@$CLUSTER_WITH
         else 
-          rabbitmqctl join_cluster $NODE_TYPE rabbit@$CLUSTER_WITH
+          rabbitmqctl join_cluster --$NODE_TYPE rabbit@$CLUSTER_WITH
         fi
         rabbitmqctl start_app
         fg
+        rabbitmq-plugins enable rabbitmq_management_agent
+        /usr/sbin/rabbitmq-server stop
     fi
+    /usr/sbin/rabbitmq-server
 fi
 
