@@ -73,7 +73,7 @@ docker run -d \
  tutum/rabbitmq
 ```
 
-And add `CLUSTER_WITH` for the others nodes :
+And add `CLUSTER_WITH` for the others nodes and `NODE_TYPE` :
 
 ```
 docker run -d \
@@ -81,6 +81,7 @@ docker run -d \
  -e HOSTNAME=node2.host.io \
  -e RABBITMQ_USE_LONGNAME=true \
  -e CLUSTER_WITH=node1.host.io \
+ -e NODE_TYPE=ram \
  tutum/rabbitmq
 ```
 RabbitMQ cluster stack file with Tutum
