@@ -8,7 +8,7 @@ fi
 PASS=${RABBITMQ_PASS:-$(jq -r ".services_password" /var/app/app.json)}
 USER=${RABBITMQ_USER:-$(jq -r ".tag" /var/app/app.json)}
 
-_word=$( [ ${RABBITMQ_PASS} ] && echo "preset" || echo "random" )
+_word=$( [ ${RABBITMQ_PASS} ] && echo "preset" )
 echo "=> Securing RabbitMQ with a ${_word} password"
 cat > /etc/rabbitmq/rabbitmq.config <<EOF
 [
