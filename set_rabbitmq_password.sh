@@ -5,8 +5,8 @@ if [ -f /.rabbitmq_password_set ]; then
 	exit 0
 fi
 
-PASS=${RABBITMQ_PASS:-$(jq -r ".services_password" /var/app/app.json)}
-USER=${RABBITMQ_USER:-$(jq -r ".tag" /var/app/app.json)}
+USER=${NEST_APP_TAG}
+PASS=${NEST_SERVICES_PASSWORD}
 
 _word=$( [ ${RABBITMQ_PASS} ] && echo "preset" )
 echo "=> Securing RabbitMQ with a ${_word} password"
