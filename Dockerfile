@@ -9,7 +9,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F7B8CEA6056E8E56 &&
     apt-get install -y --force-yes rabbitmq-server jq pwgen && \
     rabbitmq-plugins enable rabbitmq_management && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    rabbitmq-plugins enable rabbitmq_management
 
 RUN echo "ERLANGCOOKIE" > /var/lib/rabbitmq/.erlang.cookie
 RUN chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
