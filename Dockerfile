@@ -1,4 +1,4 @@
-FROM buildpack-deps:jessie-scm
+FROM buildpack-deps:stretch-scm
 MAINTAINER nest.yt
 #MAINTAINER based on work by Fernando Mayo <fernando@tutum.co>
 
