@@ -15,7 +15,6 @@ RUN apt-key adv --no-tty --keyserver keyserver.ubuntu.com --recv-keys F7B8CEA605
     rm -rf /var/lib/apt/lists/* && \
     rabbitmq-plugins enable rabbitmq_management && \
     rabbitmq-plugins enable rabbitmq_tracing && \
-    rabbitmqctl trace_on && \
     echo "ERLANGCOOKIE" > /var/lib/rabbitmq/.erlang.cookie && \
     chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie && \
     chmod 400 /var/lib/rabbitmq/.erlang.cookie && \
