@@ -7,11 +7,12 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F7B8CEA6056E8E56 &&
     echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get install -y --force-yes rabbitmq-server jq pwgen && \
-    rabbitmq-plugins enable rabbitmq_management && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    rabbitmq-plugins enable rabbitmq_management
-
+    rabbitmq-plugins enable rabbitmq_management && \
+    rabbitmq-plugins enable rabbitmq_tracing && \
+    rabbitmqctl trace_on
+ 
 RUN echo "ERLANGCOOKIE" > /var/lib/rabbitmq/.erlang.cookie
 RUN chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
 RUN chmod 400 /var/lib/rabbitmq/.erlang.cookie
